@@ -46,7 +46,7 @@ inputStr :: String
 inputStr = show inputArr
 
 outputStr :: String
-outputStr = show $ sum inputArr
+outputStr = show $ minimum inputArr
 
 par1NameStr :: String
 par1NameStr = "[a]"
