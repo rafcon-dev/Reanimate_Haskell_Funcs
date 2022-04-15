@@ -1,0 +1,339 @@
+kf.plasma.quick: Applet preload policy set to 1
+trying to show an empty dialog
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Desktop.qml:134:19: QML Loader: Binding loop detected for property "height"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Desktop.qml:134:19: QML Loader: Binding loop detected for property "height"
+trying to show an empty dialog
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Desktop.qml:134:19: QML Loader: Binding loop detected for property "height"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Desktop.qml:134:19: QML Loader: Binding loop detected for property "height"
+file:///usr/share/plasma/plasmoids/org.kde.plasma.systemmonitor/contents/ui/main.qml:43:5: QML MouseArea: Cannot anchor to an item that isn't a parent or sibling.
+file:///usr/share/plasma/plasmoids/org.kde.plasma.systemmonitor/contents/ui/main.qml:41: TypeError: Cannot read property 'length' of undefined
+file:///usr/share/plasma/plasmoids/org.kde.plasma.systemmonitor/contents/ui/main.qml:43:5: QML MouseArea: Cannot anchor to an item that isn't a parent or sibling.
+file:///usr/share/plasma/plasmoids/org.kde.plasma.systemmonitor/contents/ui/main.qml:41: TypeError: Cannot read property 'length' of undefined
+file:///usr/share/plasma/plasmoids/org.kde.panel/contents/ui/main.qml:18:1: QML DropArea (parent or ancestor of QQuickLayoutAttached): Binding loop detected for property "minimumWidth"
+file:///usr/share/ksysguard/sensorfaces/org.kde.ksysguard.piechart/contents/ui/CompactRepresentation.qml:22:1: QML CompactRepresentation: Binding loop detected for property "implicitHeight"
+trying to show an empty dialog
+file:///usr/share/ksysguard/sensorfaces/org.kde.ksysguard.textonly/contents/ui/CompactRepresentation.qml:21:1: QML CompactRepresentation (parent or ancestor of QQuickLayoutAttached): Binding loop detected for property "maximumWidth"
+trying to show an empty dialog
+trying to show an empty dialog
+Cyclic dependency detected between "file:///usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/Globals.qml" and "file:///usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/NotificationHeader.qml"
+libkcups: CUPS-Get-Printers last error: 1030 No destinations added.
+libkcups: Create-Printer-Subscriptions last error: 0 successful-ok
+libkcups: Get-Jobs last error: 0 successful-ok
+libkcups: Get-Jobs last error: 0 successful-ok
+file:///usr/share/plasma/plasmoids/org.kde.plasma.battery/contents/ui/CompactRepresentation.qml:62:17: Unable to assign [undefined] to int
+Plasma Shell startup completed
+Plasma Shell startup completed
+Plasma Shell startup completed
+libkcups: 0
+libkcups: 0
+trying to show an empty dialog
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Desktop.qml:134:19: QML Loader: Binding loop detected for property "height"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Desktop.qml:134:19: QML Loader: Binding loop detected for property "height"
+Entry is not valid "applications:org.kde.ksysguard.desktop" QSharedPointer(0x562ec4548bb0)
+Entry is not valid "applications:org.kde.ksysguard.desktop" QSharedPointer(0x562ec4c5e080)
+trying to show an empty dialog
+QFont::setPointSizeF: Point size <= 0 (0.000000), must be greater than 0
+org.kde.plasma.pulseaudio: No object for name "alsa_output.pci-0000_00_1f.3.analog-stereo.monitor"
+Qt: Session management error: networkIdsList argument is NULL
+file:///usr/share/ksysguard/sensorfaces/org.kde.ksysguard.piechart/contents/ui/FullRepresentation.qml:21:1: QML FullRepresentation: Binding loop detected for property "implicitHeight"
+trying to show an empty dialog
+trying to show an empty dialog
+qt.svg: <input>:303:258: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:463: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:659: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:913: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:1049: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:1251: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:1453: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:1631: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:1739: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:1980: Could not add child element to parent element because the types are incorrect.
+qt.svg: <input>:303:2223: Could not add child element to parent element because the types are incorrect.
+libkcups: Renew-Subscription last error: 0 successful-ok
+Paste at QVariant(QPoint, QPoint(7,919))
+Arrived mimeData () ("text/plain", "TARGETS", "MULTIPLE", "TIMESTAMP", "SAVE_TARGETS") at 7 ,  919
+QFont::setPointSizeF: Point size <= 0 (0.000000), must be greater than 0
+QFont::setPointSize: Point size <= 0 (0), must be greater than 0
+QFSFileEngine::open: No file name specified
+libkcups: Renew-Subscription last error: 0 successful-ok
+libkcups: Renew-Subscription last error: 0 successful-ok
+libkcups: Renew-Subscription last error: 0 successful-ok
+libkcups: "Scheduler started on demand."
+libkcups: CUPS-Get-Printers last error: 1030 No destinations added.
+libkcups: Get-Jobs last error: 0 successful-ok
+libkcups: 0
+libkcups: Get-Jobs last error: 0 successful-ok
+libkcups: 0
+libkcups: Renew-Subscription last error: 0 successful-ok
+
+** (process:20341): CRITICAL **: 01:07:55.600: Unable to open temporary cache: Unable to open temporary cache file: Permission denied
+Connecting to deprecated signal QDBusConnectionInterface::serviceOwnerChanged(QString,QString,QString)
+
+(filezilla:27107): Gtk-WARNING **: 01:07:59.361: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:07:59.361: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:07:59.361: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:07:59.361: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-CRITICAL **: 01:07:59.361: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:07:59.361: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:07:59.361: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:07:59.385: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-WARNING **: 01:10:30.037: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:10:30.037: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:10:30.037: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:10:30.037: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-CRITICAL **: 01:10:30.037: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:10:30.037: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:10:30.037: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:10:30.061: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:10:35.744: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+
+(filezilla:27107): Gtk-WARNING **: 01:12:09.722: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:12:09.722: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:12:09.722: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:12:09.722: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-CRITICAL **: 01:12:09.722: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:12:09.722: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:12:09.722: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:12:09.746: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:12:10.699: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:13:18.174: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-WARNING **: 01:13:27.450: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:13:27.450: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:13:27.450: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:13:27.450: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-CRITICAL **: 01:13:27.450: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:13:27.450: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:13:27.450: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:13:27.474: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+RemoteListView.cpp(618): assert "m_indexMapping.size() == pDirectoryListing->size() + 1" failed in UpdateDirectoryListing_Removed().
+
+(filezilla:27107): Gtk-WARNING **: 01:14:51.316: gtk_window_set_titlebar() called on a realized window
+RemoteListView.cpp(699): assert "GetItemCount() == (int)m_fileData.size() || CFilterManager::HasActiveFilters()" failed in SetDirectoryListing().
+
+(filezilla:27107): Gtk-WARNING **: 01:14:56.068: gtk_window_set_titlebar() called on a realized window
+
+(filezilla:27107): Gtk-WARNING **: 01:15:05.071: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:15:05.071: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:15:05.071: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:15:05.071: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:05.071: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:05.071: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:05.071: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:05.093: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-WARNING **: 01:15:09.449: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:15:09.450: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:15:09.450: Negative content width -17 (allocation 1, extents 9x9) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-WARNING **: 01:15:09.450: Negative content height -1 (allocation 1, extents 1x1) while allocating gadget (node entry, owner GtkEntry)
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:09.450: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:09.450: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:09.450: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+
+(filezilla:27107): Gtk-CRITICAL **: 01:15:09.473: gtk_box_gadget_distribute: assertion 'size >= 0' failed in GtkSpinButton
+Reading locale option from /home/starplayer/.config/filezilla/filezilla.xml
+wxD-Bus: Signal from /org/freedesktop/DBus, member NameAcquired
+wxD-Bus: Reply with serial 2
+wxD-Bus: Signal: Error: The name org.gnome.SessionManager was not provided by any .service files
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 3
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 613
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 4
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 5
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 614
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 6
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 7
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 615
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 8
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 9
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 616
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 10
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 11
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 617
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 12
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 13
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 618
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 14
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 15
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 619
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 16
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 17
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 620
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 18
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 19
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 621
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 20
+wxD-Bus: CPowerManagementInhibitor: Request successful
+wxD-Bus: CPowerManagementInhibitor: Requesting busy
+wxD-Bus: Reply with serial 21
+wxD-Bus: CPowerManagementInhibitor: Request successful, cookie is 622
+wxD-Bus: CPowerManagementInhibitor: Requesting idle
+wxD-Bus: Reply with serial 22
+wxD-Bus: CPowerManagementInhibitor: Request successful
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/lib/x86_64-linux-gnu/qt5/qml/org/kde/plasma/components.3/ScrollView.qml:34:43: QML ScrollBar: Binding loop detected for property "visible"
+libkcups: Renew-Subscription last error: 0 successful-ok
+libkcups: Renew-Subscription last error: 0 successful-ok
+file:///usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/SelectableLabel.qml:47:9: QML QQuickTextEdit: Binding loop detected for property "width"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+Logging to /tmp/qdirstat-starplayer/qdirstat.log
+QObject::disconnect: Unexpected nullptr parameter
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+libkcups: Renew-Subscription last error: 0 successful-ok
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/views/Panel.qml:15:1: QML Panel: Binding loop detected for property "state"
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:209: TypeError: Cannot call method 'globalAction' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:198: TypeError: Cannot call method 'action' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:192: TypeError: Cannot call method 'action' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:20: TypeError: Cannot read property 'editMode' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:33: TypeError: Cannot read property 'editMode' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:34: TypeError: Cannot read property 'editMode' of null
+trying to show an empty dialog
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:63: TypeError: Cannot read property 'pluginName' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:65: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:66: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:67: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:68: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:69: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:20: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:21: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:22: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:23: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/packages/org.kde.paneltoolbox/contents/ui/main.qml:18: TypeError: Cannot read property 'formFactor' of null
+file:///usr/share/plasma/packages/org.kde.paneltoolbox/contents/ui/main.qml:90: TypeError: Cannot read property 'editMode' of null
+file:///usr/share/plasma/packages/org.kde.paneltoolbox/contents/ui/main.qml:35: TypeError: Cannot read property 'editMode' of null
+file:///usr/share/plasma/packages/org.kde.paneltoolbox/contents/ui/main.qml:24: TypeError: Cannot read property 'editMode' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/devicenotifier.qml:24: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/devicenotifier.qml:235: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/devicenotifier.qml:241: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/devicenotifier.qml:247: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.devicenotifier/contents/ui/devicenotifier.qml:255: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.vault/contents/ui/main.qml:18: TypeError: Cannot read property 'nativeInterface' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.vault/contents/ui/main.qml:17: TypeError: Cannot read property 'nativeInterface' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.keyboardindicator/contents/ui/main.qml:21: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/main.qml:141: TypeError: Cannot read property 'nativeInterface' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/Globals.qml:65:5: Unable to assign [undefined] to QObject*
+file:///usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/global/Globals.qml:162: TypeError: Cannot read property 'nativeInterface' of null
+file:///usr/share/plasma/plasmoids/org.kde.kdeconnect/contents/ui/main.qml:38: TypeError: Cannot read property 'formFactor' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.volume/contents/ui/main.qml:26: TypeError: Cannot read property 'configuration' of null
+libkcups: Cancel-Subscription last error: 0 successful-ok
+libkcups: Create-Printer-Subscriptions last error: 0 successful-ok
+libkcups: Cancel-Subscription last error: 0 successful-ok
+file:///usr/share/plasma/plasmoids/org.kde.plasma.battery/contents/ui/batterymonitor.qml:164: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.networkmanagement/contents/ui/main.qml:69: TypeError: Cannot read property 'expanded' of null
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/applet/CompactApplet.qml:52: TypeError: Cannot read property 'implicitWidth' of null
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/applet/CompactApplet.qml:70: TypeError: Cannot read property 'implicitHeight' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/ui/Kickoff.qml:143: TypeError: Cannot read property 'formFactor' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/ui/Kickoff.qml:134: TypeError: Cannot read property 'location' of null
+file:///usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/ui/KickoffSingleton.qml:81: TypeError: Cannot read property 'formFactor' of null
+QObject::disconnect: Unexpected nullptr parameter
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/applet/CompactApplet.qml:48: TypeError: Cannot read property 'Layout' of null
+file:///usr/share/plasma/shells/org.kde.plasma.desktop/contents/applet/CompactApplet.qml:66: TypeError: Cannot read property 'Layout' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:209: TypeError: Cannot read property 'globalAction' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:198: TypeError: Cannot read property 'action' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:192: TypeError: Cannot read property 'action' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:20: TypeError: Cannot read property 'editMode' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:33: TypeError: Cannot read property 'editMode' of null
+file:///usr/share/plasma/packages/org.kde.desktoptoolbox/contents/ui/ToolBoxButton.qml:34: TypeError: Cannot read property 'editMode' of null
+trying to show an empty dialog
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:63: TypeError: Cannot read property 'pluginName' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:65: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:66: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:67: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:68: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:69: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:20: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:21: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:22: TypeError: Cannot read property 'configuration' of null
+file:///usr/share/plasma/wallpapers/org.kde.image/contents/ui/main.qml:23: TypeError: Cannot read property 'configuration' of null
+Hspell: can't open /usr/share/hspell/hebrew.wgz.sizes.
+kf.sonnet.clients.hspell: HSpellDict::HSpellDict: Init failed
