@@ -4,9 +4,10 @@
 This project aims to illustrate how a few standard Haskell functions work, animated with the help of [Reanimate](https://reanimate.github.io/).
 
 
-![alt text](length.gif)
-![alt text](sum.gif)
-![alt text](product.jpg)
-![alt text](maximum.jpg)
-![alt text](minimum.jpg)
-![alt text](reverse.jpg)
+![length](length.gif)
+![sum](sum.gif)
+![product](product.gif)
+![maximum](maximum.gif)
+![minimum](minimum.gif)
+![reverse](reverse.gif)
+![reverse](reverse_hangs.gif)
