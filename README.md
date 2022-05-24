@@ -6,6 +6,7 @@ This project aims to illustrate how a few standard Haskell functions work, anima
 
 ![alt text](length.gif)
 ![alt text](sum.gif)
+![alt text](product.jpg)
 ![alt text](maximum.jpg)
 ![alt text](minimum.jpg)
 ![alt text](reverse.jpg)
