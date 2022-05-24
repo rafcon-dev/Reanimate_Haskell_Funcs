@@ -1,7 +1,8 @@
 # Reanimate - Haskell Functions
 
 
-This project aims to illustrate how a few standard Haskell functions work, animated with the help of [Reanimate](https://reanimate.github.io/).
+This project aims to illustrate how a few standard Haskell functions work.
+Animated with the help of [Reanimate](https://reanimate.github.io/).
 
 
 ![length](length.gif)
