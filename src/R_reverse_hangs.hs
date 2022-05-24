@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 
-module Rafael_reverse_hangs (animation) where
+module R_reverse_hangs (animation) where
 import Codec.Picture --(PixelRGBA8)
 import Control.Lens
 import Control.Monad (forM, forM_, when)
@@ -29,24 +29,22 @@ import Common.AnimUtils
 import Common.Assets
 
 
-
-
 --SVG OBJECTS DEFINITION-------------------------------------------------------------------------------------------------
 
 funcNameStr :: String
-funcNameStr = "r"
+funcNameStr = "reverse"
 
 inputLabelStr :: String
 inputLabelStr = "input"
 
 inputLength :: Int
-inputLength = 4
+inputLength = 40
 
 inputStr :: String
 inputStr = "[1..]"
 
 expandedInput :: String
-expandedInput = "[1,23,3,4,..]"
+expandedInput = show [1..inputLength]
 
 outputStr :: String
 outputStr = "hangs forever"
@@ -63,9 +61,7 @@ inputScale = 0.7
 sigHeight = 4.0
 sigScale = 0.7
 
---letterSpacing = snd $ splitGlyphs [0,1] $ latexCfg calligraCfg $ L.pack $ show $ "1,"
 letterSpacing = 0.45
-    
     
 -- InputFull
 inputFull =     
@@ -75,134 +71,58 @@ inputFull =
             equal = length inputLabelStr
             txt = inputLabelStr ++ " = " ++ inputStr
 
-funcEnd = length funcNameStr - 1
 
 -- Function signature
-sig = 
-    withColFromToPixel funcColorPixel 0 funcEnd $
-    withColFromToPixel funcColorPixel colonsStart colonsEnd $
-    withColFromToPixel tokensColorPixel par1Start par1End $
-    withColFromToPixel funcColorPixel arrow arrow $
-    withColFromToPixel tokensColorPixel par2Start par2End $
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack $ txt
-    where
-        colonsStart = funcEnd + 1
-        colonsEnd = colonsStart + 1
-        par1Start = colonsEnd + 1
-        par1End = par1Start -1 + length par1NameStr
-        arrow = par1End + 1
-        par2Start = arrow + 1
-        par2End = par2Start -1 + length par2NameStr
-        txt = funcNameStr ++ " :: " ++ par1NameStr ++ " $\\rightarrow$ " ++ par2NameStr
-        
-
-    
---Full Function 
-
+sig = get1ParFunctionSignature funcNameStr par1NameStr par2NameStr
+            
+--Full Function versions
 txtStartToEqual = funcNameStr ++ " " ++ inputLabelStr ++ " ="
 txtEqualToEnd = " " ++ funcNameStr ++ " " ++ inputStr
 txtStartToEnd = txtStartToEqual ++ txtEqualToEnd
 txtFinalStartToEnd = txtStartToEqual ++ " " ++ funcNameStr ++ " " ++ expandedInput
 txtEqualToEndOutput = " " ++ outputStr
 
-funcFull = 
-    withColFromToPixel funcColorPixel 0 funcEnd $ 
-    withColFromToPixel textColorPixel input1Start input1End $ 
-    withColFromToPixel tokensColorPixel equalPos equalPos $ 
-    withColFromToPixel funcColorPixel input2Start input2End $ 
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
-    where
-        input1Start = funcEnd + 1
-        input1End = input1Start - 1 + length inputLabelStr
-        equalPos = funcEnd + length inputLabelStr + 1
-        input2Start = equalPos + 1
-        input2End = input2Start - 1 + length funcNameStr
-        txt = L.pack $ txtStartToEqual ++ txtEqualToEnd
-        
-funcFullExpanded = 
-    withColFromToPixel funcColorPixel 0 funcEnd $ 
-    withColFromToPixel textColorPixel input1Start input1End $ 
-    withColFromToPixel tokensColorPixel equalPos equalPos $ 
-    withColFromToPixel funcColorPixel input2Start input2End $ 
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
-    where
-        input1Start = funcEnd + 1
-        input1End = input1Start - 1 + length inputLabelStr
-        equalPos = funcEnd + length inputLabelStr + 1
-        input2Start = equalPos + 1
-        input2End = input2Start - 1 + length funcNameStr
-        txt = L.pack $ txtFinalStartToEnd
+funcFull = get1ParExpandedFunction funcNameStr inputLabelStr inputStr
 
-funcFullAtEnd = 
-    withColFromToPixel funcColorPixel 0 funcEnd $ 
-    withColFromToPixel textColorPixel input1Start input1End $ 
-    withColFromToPixel tokensColorPixel equalPos equalPos $ 
-    withColFromToPixel funcColorPixel outputStart outputEnd $ 
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
-    where
-        input1Start = funcEnd + 1
-        input1End = input1Start - 1 + length inputLabelStr
-        equalPos = funcEnd + length inputLabelStr + 1
-        outputStart = equalPos + 1
-        outputEnd = outputStart - 1 + length outputStr
-        txt = L.pack $ txtStartToEqual ++ txtEqualToEndOutput
+funcFullExpanded = get1ParExpandedFunction funcNameStr inputLabelStr expandedInput
 
---funcExpandedInput = withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack expandedInput
+funcFullAtEnd = getFunctionAtEnd funcNameStr inputLabelStr outputStr
 
-equalGlyphPos2 = -1 + length $ filter (/= ' ') txtStartToEqual
+equalGlyphPos = -1 + length $ filter (/= ' ') txtStartToEqual
 
-funcLeftOfEqual = snd $ splitGlyphs [0,1..equalGlyphPos2] funcFull
+funcLeftOfEqual = snd $ splitGlyphs [0,1..equalGlyphPos] funcFull
 funcRightOfEqual = snd $ splitGlyphs [s,s+1..s+e] funcFull
     where
-        s = equalGlyphPos2 + 1
+        s = equalGlyphPos + 1
         e = s + ( length $ filter (/= ' ') txtEqualToEnd)
---funcRightOfEqual = fst $ splitGlyphs [0,1..equalGlyphPos2]  funcFull
 
 funcNameRight = snd $ splitGlyphs [s,s+1..s + length funcNameStr - 1] funcFull
     where
-        s = equalGlyphPos2 + 1
+        s = equalGlyphPos + 1
+        
+output = snd $ splitGlyphs [s,s+1..s + length outputStr - 1] funcFullAtEnd
+    where
+        s = equalGlyphPos + 1
         
 brackets = snd $ splitGlyphs bracketIndices funcFull
     where
         bracketIndices = DL.findIndices (\x -> x=='[') $ filter (/= ' ') $ txtStartToEnd
-        s = equalGlyphPos2 + length funcNameStr + 1
+        s = equalGlyphPos + length funcNameStr + 1
         
 letters = reverse $ map (\i -> snd $ splitGlyphs [i] lettersTogether) [0,1..inputLength-1]
     where
         lettersTogether = snd $ splitGlyphs [s,s+2..s + length inputStr-1] funcFull
-        s = equalGlyphPos2 + length funcNameStr + 2
-    
-    
-funcExpandedInput = alignLeftSVGTo (snd $ splitGlyphs [s,s+1..s + length expandedInput-1] funcFullExpanded) brackets
-    where
-        s = M.fromMaybe 0 $ DL.findIndex (\x -> x=='[') $ filter (/= ' ') $ txtFinalStartToEnd
+        s = equalGlyphPos + length funcNameStr + 2
 
 numbers = map (\i -> snd $ splitGlyphs i numbersTogether) indices
     where
         numbersTogether = snd $ splitGlyphs numbersIndices funcExpandedInput
-        s = equalGlyphPos2 + length funcNameStr + 2
+        s = equalGlyphPos + length funcNameStr + 2
         numbersIndices = fmap (+(0)) $ DL.findIndices (\x -> isDigit x) $ filter (/= ' ') $ reverse $ expandedInput
-        
-        separated = DLS.splitOn "," $ filter (/= ' ') $ reverse $ expandedInput
-        lengths = [1] ++ [length $ separated!!1,length $ separated!!2..length $ last separated]
-        --indices = map (\l -> take (fst l) [(snd l)..]) $ zip lengths iterator
-        indices = [[0],[1,2],[3],[4]]
-        iterator = [0] ++ (tail $ scanl (+) 1 lengths)
-        
-numbers2 = map (\i -> translate (xPos i) 0 $ svgNumber i) [1,2..inputLength]
-    where
-        xPos i= (fromIntegral i)*letterSpacing*2*(fromIntegral $ 1)
-   
---separators = [svgFromText "["] ++ commas
-  --  where
-    --    commas = map (\i -> translate (xPos i) (-0.3) svgComma) [1,2..inputLength]
-      --  xPos i = (fromIntegral i)*letterSpacing*2*(fromIntegral $ 1) + letterSpacing
-      --  svgComma = svgFromText ","
-        
---commas = map (\i -> translate (xPos i) 0 svgComma) [1,2..inputLength]
---    where
---        xPos i = (fromIntegral i)*letterSpacing*(fromIntegral $ nDigits i) + letterSpacing
---        svgComma = svgFromText ","
+        separated = DLS.splitOneOf ",[" $ filter (/= ' ') $ expandedInput
+        lengths = (map (\s -> length s) $ tail separated)
+        indices = map (\l -> take (fst l) [(snd l)..]) $ zip lengths iterator
+        iterator = (scanl1 (+) ([0] ++ lengths))
 
 separators =  map (\i -> snd $ splitGlyphs [i] numbersTogether) [0,1..inputLength-1]
     where
@@ -212,23 +132,11 @@ separators =  map (\i -> snd $ splitGlyphs [i] numbersTogether) [0,1..inputLengt
 ellipsis = snd $ splitGlyphs [totLength-3,totLength-2,totLength-1] funcFull
     where
         totLength = length $ filter (/= ' ') $ txtStartToEnd
---
-
-alignLeftSVGTo :: Tree -> Tree -> Tree
-alignLeftSVGTo svg target = translate (minXTarget-minXOriginal) 0 svg
+        
+funcExpandedInput = alignLeftSVGTo (snd $ splitGlyphs [s,s+1..s + length expandedInput-1] funcFullExpanded) brackets
     where
-        (minXTarget, _, _, _) = boundingBox target
-        (minXOriginal, _, _, _) = boundingBox svg
-        
-nDigits n = toInteger (round (logBase 10 (fromIntegral n)) + 1)
-
-svgFromText txt = withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack $ txt
-
-svgNumber n = svgFromText $ show n
-
-counter :: Integer -> SVG
-counter i = withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack (show i)
-        
+        s = M.fromMaybe 0 $ DL.findIndex (\x -> x=='[') $ filter (/= ' ') $ txtFinalStartToEnd
+--   
 ----------------------------------------------------------------------------------------------------------------------
 
 --ANIMATION PER SE-----------------------------------------------------
@@ -238,6 +146,8 @@ env = addStatic bg
 animation :: Animation
 animation = env $ scene $ do
     
+    cam <- newObject Camera
+
     --fadeIn-------------------------------------------------------------------------------------------------------
     obj_fadeOverlay <- oNew fadeOverlay
     adjustZ (\z -> 10) $ oShow obj_fadeOverlay
@@ -245,18 +155,18 @@ animation = env $ scene $ do
     ---
     
     --show signature--------------------------------------------------------------------------------------------------
-    obj_FullSignature <- oNew sig
+    obj_FullSignature <- oNewWithCam sig cam
     oShowWith obj_FullSignature oFadeIn
     --
     
     wait 0.3
-     
+
     --show input line-------------------------------------------------------------------------------------
-    obj_InputFull <- oNew inputFull; 
+    obj_InputFull <- oNewWithCam inputFull cam
     oModifyS obj_InputFull $ oBottomY .= - 2.5
     oShowWith obj_InputFull oFadeIn
     --
-    
+        
     wait 0.8
     
     --move signature and input to the top------------------------------------------------------------------
@@ -270,7 +180,7 @@ animation = env $ scene $ do
     wait 0.5
     
     --create copy of signature at the same position of the original one----------------------------------------------------------
-    obj_FullSignatureCopy <- oNew sig
+    obj_FullSignatureCopy <- oNewWithCam sig cam
     fullBottomY <- oRead obj_FullSignature oBottomY
     fullScale <- oRead obj_FullSignature oScale
     oModifyS obj_FullSignatureCopy $ oScale .= fullScale >> oBottomY .= fullBottomY
@@ -297,13 +207,12 @@ animation = env $ scene $ do
     waitOn $ tweenVar arrowVar 1.2 $ \val -> (-1) + curveS 2
     --
     
-    wait 0.1
+    wait 0.0
 
-    
     --Transform the function signature to the expanded function------------------------------------------------------------------------
     
     --First create two separate parts of the expanded function, so we can edit the right part of the equal sign. Don't show them still.
-    obj_FuncFull <- oNew funcFull --to extract correct coordinates from
+    obj_FuncFull <- oNewWithCam funcFull cam --to extract correct coordinates from
 
 
     --Animate the transformation
@@ -314,20 +223,19 @@ animation = env $ scene $ do
         ,oShowWith obj_FuncFull $ adjustDuration (*1.5) . oScaleIn
         ]
             --
-    
     -------------------------------------------------------------------------------------------------------------
     --We now have an expanded function in the middle of the screen (i.e.: reverse input = reverse [x,y,z])
     ----------------------------------------------------------------------------------------------------------------
     
     --replace full function with separate parts seamlessly
-    obj_funcLeftOfEqual <- oNew funcLeftOfEqual
-    obj_funcNameRight  <- oNew funcNameRight
-    obj_brackets  <- oNew brackets
+    obj_funcLeftOfEqual <- oNewWithCam funcLeftOfEqual cam
+    obj_funcNameRight  <- oNewWithCam funcNameRight cam
+    obj_brackets  <- oNewWithCam brackets cam
     
-    obj_numbers <- mapM oNew numbers
-    obj_separators <- mapM oNew separators
+    obj_numbers <- mapM (\n -> oNewWithSvgPosAndCam n cam) numbers
+    obj_separators <- mapM (\s -> oNewWithSvgPosAndCam s cam) separators
     
-    obj_ellipsis <- oNew ellipsis
+    obj_ellipsis <- oNewWithSvgPosAndCam ellipsis cam
     oShow obj_ellipsis
     oHide obj_FuncFull
     
@@ -335,47 +243,45 @@ animation = env $ scene $ do
     oShow obj_funcNameRight
     oShow obj_brackets
     
-    --obj_test <- oNew funcExpandedInput
-    --oShow obj_test
-    --oAlignLeftTo obj_funcLeftOfEqual obj_brackets 0
-    
-    --wait 2
     oShow $ obj_numbers!!0
-    oShow $ obj_separators!!0
-    --mapM oShow obj_separators
-    --mapM oShow obj_letters
     
     --cleanup
     destroySprite sprite_Arrow
-
     
     --Function working animation----------------------------------------------------------------------------------------
     
-            
     wait 0.1
     
-    waitOn $ forkAllWithDifferentLags [0.2, 0.1,0.0,0.1]
+    --bounces the name of the function onto the array to mimic a "connection", plays the reverse animation, and follow with camera
+    waitOn $ forkAllWithDifferentLags [0.2, 0.1,0,0,0,7]
         [
         bounceOnX obj_funcNameRight
         ,bounceOnX obj_brackets
         ,forkAll $ map bounceOnX obj_numbers
-        ,reverseHangsAnimation (zip obj_numbers obj_separators) obj_ellipsis 0.2 0.3 2.5
+        ,reverseHangsAnimation (zip obj_numbers obj_separators) obj_ellipsis cam 0.14 0.19 2.2
+        ,cameraZoom cam 6 0.75
+        ,cameraPan cam 10 $ V2 25 0
+        ,fadeOutObjs (obj_numbers) 1.5
         ]
     
-    wait 0.2
-    
-    obj_funcFullAtEnd <- oNew funcFullAtEnd --to get coordinates from
+    obj_result <- oNewWithSvgPosAndCam output cam
+    obj_funcFullAtEnd <- oNewWithCam funcFullAtEnd cam --to get coordinates from
     funcFullAtEndLeft <- oRead obj_funcFullAtEnd oLeftX 
     funcFullAtEndRight <- oRead obj_funcFullAtEnd oRightX 
-        
-    waitOn $ forkAllWithDifferentLags [1.5,0,0]
+    
+    oHide obj_funcNameRight
+    
+    --get camera back into the origin, fade out the commas, fadein the result
+    waitOn $ forkAllWithDifferentLags [0,0,0,1,0,0]
         [
-        oHideWith obj_funcNameRight $ adjustDuration (*1.5). oFadeOut
+        cameraPan cam 2.5 $ V2 0 0
+        ,fadeOutObjs (obj_separators ++ [obj_ellipsis, obj_brackets]) 1.5
+        ,cameraZoom cam 3 1
         ,oAlignLeftTo obj_funcLeftOfEqual obj_funcFullAtEnd 1
-        ,oAlignRightTo obj_brackets obj_numbers obj_funcFullAtEnd 1
+        ,oAlignRightTo obj_result [] obj_funcFullAtEnd 1
+        ,oShowWithFadeInSliding obj_result 3
         ]
         
-    
     wait 1.3
     
     --smoothly fade out, as we're over
@@ -384,27 +290,19 @@ animation = env $ scene $ do
     oShowWith obj_fadeOutOverlay $ adjustDuration (*2). oFadeIn
     --
     
-    
-reverseHangsAnimation :: [(Object s Tree, Object s tree)] -> Object s Tree -> Double -> Double -> Double -> Scene s ()
-reverseHangsAnimation  [] _ _ _ _ = do wait 0.0
-reverseHangsAnimation  (x:xs) obj_ellipsis archHeight forkLag dur = do
-                                                    --targetX <- oRead (snd $ x) oCenterX
+--iteratively create the elements of the array one by one, speeding up on each one (hence the forkLag/1.15). The rest are magic numbers that work well together, by trial and error.
+reverseHangsAnimation :: [(Object s Tree, Object s tree)] -> Object s Tree -> Object s Camera -> Double -> Double -> Double -> Scene s ()
+reverseHangsAnimation  [] _ _ _ _ _ = do wait 0.0
+reverseHangsAnimation  (x:xs) obj_ellipsis cam archHeight forkLag dur = do
                                                     curElementXPos <- oRead (fst x) oCenterX
-                                                    oShow $ fst x
-                                                    oShow $ snd x
-                                                    --waitOn $ oMoveToNewX (fst x) targetX 0.8
-                                                    forkAllWithLag forkLag $ [oMoveToNewX obj_ellipsis curElementXPos 0.8, oMoveToNewX_OnAnArch (fst x) 20 archHeight dur, reverseHangsAnimation xs obj_ellipsis archHeight forkLag dur]
-                                                    return ()
                                                     
-reverseHangsAnimation2 :: [(Object s Tree, Object s tree)] -> Object s Tree -> Double -> Double -> Double -> Scene s ()
-reverseHangsAnimation2  [] _ _ _ _ = do wait 0.0
-reverseHangsAnimation2  (x:xs) obj_ellipsis archHeight forkLag dur = do
-                                                    --targetX <- oRead (snd $ x) oCenterX
-                                                    curElementXPos <- oRead (fst x) oCenterX
-                                                    oShow $ fst x
-                                                    oShow $ snd x
-                                                    --waitOn $ oMoveToNewX (fst x) targetX 0.8
-                                                    forkAllWithLag forkLag $ [oMoveToNewX obj_ellipsis curElementXPos 0.8, oMoveToNewX_OnAnArch (fst x) 20 archHeight dur, reverseHangsAnimation2 xs obj_ellipsis archHeight forkLag dur]
-                                                    return ()
+                                                    forkAllWithDifferentLags [forkLag*2.5,forkLag,forkLag,forkLag,forkLag] $
+                                                        [
+                                                        oMoveToNewX obj_ellipsis (curElementXPos+1.5) (forkLag*2.5) --slide right bracket
+                                                        ,oShow $ fst x --show number
+                                                        ,oShow $ snd x --show comma
+                                                        ,oMoveToNewX_OnAnArch (fst x) (60+curElementXPos*(1/(3*forkLag))) archHeight dur --send number far right
+                                                        ,reverseHangsAnimation xs obj_ellipsis cam archHeight (forkLag/1.15) dur --next number, same thing, but faster
+                                                        ]
+                                                    return ()                                                  
     
-

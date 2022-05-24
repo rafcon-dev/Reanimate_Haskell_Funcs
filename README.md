@@ -1,1 +1,1 @@
-# Reanimate_Haskell_Funcs
+# list-animations

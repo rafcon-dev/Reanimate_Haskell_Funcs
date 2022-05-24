@@ -14,6 +14,8 @@ module Common.Utils
     ,indexOfMaximum
     ,indexOfMinimum
     ,showCharArray
+    ,oNewWithCam
+    ,oNewWithSvgPosAndCam
     ) where
 
 import Codec.Picture --(PixelRGBA8)
@@ -26,7 +28,9 @@ import Reanimate.LaTeX
 import Reanimate.Scene
 import Reanimate.Svg
 import Reanimate.ColorComponents
+import qualified Data.Text as L
 
+import Common.Others
 --Color definition utility functions---------------------------------------------------------------------------------
 withColFromTo :: String -> Int -> Int -> SVG -> SVG
 withColFromTo color start end = withSubglyphs [start .. end] (\v -> withFillColor color v)
@@ -35,6 +39,8 @@ withColFromToPixel :: PixelRGBA8 -> Int -> Int -> SVG -> SVG
 withColFromToPixel color start end = withSubglyphs [start .. end] (\v -> withFillColorPixel color v)
 --------------------------------------------------------------------------------------------------------
 
+
+      
 --Utils--------------------------------------------------------------------------------------------------------------
                               
 -- Transform polar coordinates to Cartesian coordinates
@@ -70,3 +76,19 @@ indexOfMinimum xs = head $ filter ((== minimum xs) . (xs !!)) [0..]
 showCharArray :: [Char] -> String
 showCharArray arr = "[" ++ (DL.intersperse ',' arr) ++ "]"
 ---------------------------------------------------------------
+
+-- Camera utils -------------------------------------------------------------------
+
+oNewWithCam :: Renderable a => a -> Object s Camera -> Scene s (Object s a) 
+oNewWithCam a cam = do 
+                    res <- oNew a
+                    cameraAttach cam res
+                    return res
+                    
+oNewWithSvgPosAndCam :: SVG -> Object s Camera -> Scene s (Object s SVG) 
+oNewWithSvgPosAndCam svg cam = do 
+                                res <- oNewWithSvgPos svg
+                                cameraAttach cam res
+                                return res
+
+----------------------------------------------------------------------------------

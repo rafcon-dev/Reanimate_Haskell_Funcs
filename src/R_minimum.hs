@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 
-module Rafael_minimum (animation) where
+module R_minimum (animation) where
 import Codec.Picture --(PixelRGBA8)
 import Control.Lens
 import Control.Monad (forM, forM_, when)
@@ -77,25 +77,8 @@ inputFull =
 funcEnd = length funcNameStr - 1
 
 -- Function signature
-sig = 
-    withColFromToPixel funcColorPixel 0 funcEnd $
-    withColFromToPixel funcColorPixel colonsStart colonsEnd $
-    withColFromToPixel tokensColorPixel par1Start par1End $
-    withColFromToPixel funcColorPixel arrow arrow $
-    withColFromToPixel tokensColorPixel par2Start par2End $
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack $ txt
-    where
-        colonsStart = funcEnd + 1
-        colonsEnd = colonsStart + 1
-        par1Start = colonsEnd + 1
-        par1End = par1Start -1 + length par1NameStr
-        arrow = par1End + 1
-        par2Start = arrow + 1
-        par2End = par2Start -1 + length par2NameStr
-        txt = funcNameStr ++ " :: " ++ par1NameStr ++ " $\\rightarrow$ " ++ par2NameStr
+sig = get1ParFunctionSignature funcNameStr par1NameStr par2NameStr
         
-
-    
 --Full Function 
 
 txtStartToEqual = funcNameStr ++ " " ++ inputLabelStr ++ " ="
@@ -103,45 +86,20 @@ txtEqualToEnd = " " ++ funcNameStr ++ " " ++ inputStr
 txtEqualToEndOutput = " " ++ outputStr
 funcFullStr = txtStartToEqual ++ txtEqualToEnd
 
-funcFull = 
-    withColFromToPixel funcColorPixel 0 funcEnd $ 
-    withColFromToPixel textColorPixel input1Start input1End $ 
-    withColFromToPixel tokensColorPixel equalPos equalPos $ 
-    withColFromToPixel funcColorPixel input2Start input2End $ 
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
-    where
-        input1Start = funcEnd + 1
-        input1End = input1Start - 1 + length inputLabelStr
-        equalPos = funcEnd + length inputLabelStr + 1
-        input2Start = equalPos + 1
-        input2End = input2Start - 1 + length funcNameStr
-        txt = L.pack $ funcFullStr
+funcFull = get1ParExpandedFunction funcNameStr inputLabelStr inputStr
 
-funcFullAtEnd = 
-    withColFromToPixel funcColorPixel 0 funcEnd $ 
-    withColFromToPixel textColorPixel input1Start input1End $ 
-    withColFromToPixel tokensColorPixel equalPos equalPos $ 
-    withColFromToPixel funcColorPixel outputStart outputEnd $ 
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
-    where
-        input1Start = funcEnd + 1
-        input1End = input1Start - 1 + length inputLabelStr
-        equalPos = funcEnd + length inputLabelStr + 1
-        outputStart = equalPos + 1
-        outputEnd = outputStart - 1 + length outputStr
-        txt = L.pack $ txtStartToEqual ++ txtEqualToEndOutput
+funcFullAtEnd = getFunctionAtEnd funcNameStr inputLabelStr outputStr
     
-equalGlyphPos2 = -1 + length $ filter (/= ' ') txtStartToEqual
+equalGlyphPos = -1 + length $ filter (/= ' ') txtStartToEqual
 
-funcLeftOfEqual = snd $ splitGlyphs [0,1..equalGlyphPos2] funcFull
+funcLeftOfEqual = snd $ splitGlyphs [0,1..equalGlyphPos] funcFull
 funcRightOfEqual = snd $ splitGlyphs [s,s+1..s+e] funcFull
     where
-        s = equalGlyphPos2 + 1
+        s = equalGlyphPos + 1
         e = s + ( length $ filter (/= ' ') txtEqualToEnd)
---funcRightOfEqual = fst $ splitGlyphs [0,1..equalGlyphPos2]  funcFull
 funcNameRight = snd $ splitGlyphs [s,s+1..s + length funcNameStr - 1] funcFull
     where
-        s = equalGlyphPos2 + 1
+        s = equalGlyphPos + 1
         
 brackets = snd $ splitGlyphs indices funcFull
     where
@@ -149,7 +107,7 @@ brackets = snd $ splitGlyphs indices funcFull
         
 values = map (\g -> snd $ splitGlyphs g funcFull) glyphGroups
     where
-        s = equalGlyphPos2 + length funcNameStr + 1
+        s = equalGlyphPos + length funcNameStr + 1
         valLengths = map (length . show) inputArr
         valLenghts1 = map succ valLengths
         gStarts = map (\i -> i + s) $ scanl (+) 1 valLenghts1
@@ -169,12 +127,7 @@ moreThanQuestion = mkGroup
                     withColFromToPixel funcColorPixel 0 0 $ center $ latexCfg calligraCfg $ L.pack $ ">"
                     ,scale 0.7 $ translate 0 0.6 $ withColFromToPixel funcColorPixel 0 0 $ center $ latexCfg calligraCfg $ L.pack $ "?"
                     ]
-   
-
-counter :: Integer -> SVG
-counter i = withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack (show i)
-
-        
+           
 ----------------------------------------------------------------------------------------------------------------------
 
 --ANIMATION PER SE-----------------------------------------------------
@@ -184,6 +137,8 @@ env = addStatic bg
 animation :: Animation
 animation = env $ scene $ do
     
+    cam <- newObject Camera
+    
     --fadeIn-------------------------------------------------------------------------------------------------------
     obj_fadeOverlay <- oNew fadeOverlay
     adjustZ (\z -> 10) $ oShow obj_fadeOverlay
@@ -191,14 +146,14 @@ animation = env $ scene $ do
     ---
     
     --show signature--------------------------------------------------------------------------------------------------
-    obj_FullSignature <- oNew sig
+    obj_FullSignature <- oNewWithCam sig cam
     oShowWith obj_FullSignature oFadeIn
     --
     
     wait 0.3
      
     --show input line-------------------------------------------------------------------------------------
-    obj_InputFull <- oNew inputFull; 
+    obj_InputFull <- oNewWithCam inputFull cam
     oModifyS obj_InputFull $ oBottomY .= - 2.5
     oShowWith obj_InputFull oFadeIn
     --
@@ -216,7 +171,7 @@ animation = env $ scene $ do
     wait 0.5
     
     --create copy of signature at the same position of the original one----------------------------------------------------------
-    obj_FullSignatureCopy <- oNew sig
+    obj_FullSignatureCopy <- oNewWithCam sig cam
     fullBottomY <- oRead obj_FullSignature oBottomY
     fullScale <- oRead obj_FullSignature oScale
     oModifyS obj_FullSignatureCopy $ oScale .= fullScale >> oBottomY .= fullBottomY
@@ -245,7 +200,6 @@ animation = env $ scene $ do
     
     wait 0.1
 
-    
     --Transform the function signature to the expanded function------------------------------------------------------------------------
     
     --First create two separate parts of the expanded function, so we can edit the right part of the equal sign. Don't show them still.
@@ -266,9 +220,9 @@ animation = env $ scene $ do
     ----------------------------------------------------------------------------------------------------------------
     
     --replace full function with separate parts seamlessly
-    obj_funcLeftOfEqual <- oNew funcLeftOfEqual
-    obj_funcNameRight  <- oNew funcNameRight
-    obj_brackets  <- oNew brackets
+    obj_funcLeftOfEqual <- oNewWithCam funcLeftOfEqual cam
+    obj_funcNameRight  <- oNewWithCam funcNameRight cam
+    obj_brackets  <- oNewWithCam brackets cam
     
     obj_values <- traverse oNewWithSvgPos values
     
@@ -308,7 +262,7 @@ animation = env $ scene $ do
     firstElX <- oRead (head obj_values) oTranslateX
     waitOn $ oMoveToNewX obj_op firstElX 0.8
     
-    obj_minFound <- oNew minFound
+    obj_minFound <- oNewWithCam minFound cam
     
     oModifyS obj_minFound $ oTranslateX .= firstElX >> oTranslateY .= 0 >> oScale .= 0
     oShow obj_minFound
@@ -333,7 +287,7 @@ animation = env $ scene $ do
    --     ,oMoveFlipObjects_OnAnArch2 (zip obj_letters (reverse obj_letters)) 0.7 0.3 2.5
    --     ]
    
-    obj_result <- oNew $ counter $ minimum inputArr
+    obj_result <- oNewWithCam (counter $ minimum inputArr) cam
     let min_Index = indexOfMinimum inputArr
     resultX <- oRead (fst $ obj_array_withOriginalArray!!min_Index) oTranslateX
     resultY <- oRead (fst $ obj_array_withOriginalArray!!min_Index) oTranslateY
@@ -343,7 +297,7 @@ animation = env $ scene $ do
     
     wait 0.2
     
-    obj_funcFullAtEnd <- oNew funcFullAtEnd --to get coordinates from
+    obj_funcFullAtEnd <- oNewWithCam funcFullAtEnd cam--to get coordinates from
     funcFullAtEndLeft <- oRead obj_funcFullAtEnd oLeftX 
     funcFullAtEndRight <- oRead obj_funcFullAtEnd oRightX 
         
@@ -371,16 +325,6 @@ animation = env $ scene $ do
     oShowWith obj_fadeOutOverlay $ adjustDuration (*2). oFadeIn
     --
     
-    
---ANIMATIONS--------------------------------------------------------------------------------------------------------
---REMINDER:oTranslateX is the x position of the origin of the object.
------------oCenterX is the x position of the center of the bounding box of the svg drawing
------------an object can have oTranslate=0, but have it's drawing in any place, and the center of that "place" is oCenter
------------functions that animate the context (and use functions like translate, scale, etc), are effectively
------------changing the SVG drawing, while functions that animate the oTranslate values for example, are changing
------------the object that contains said SVG. A bit like Blender's Object and Edit mode.
-
-
 --the repeating animation for the counter. Basically a for cycle. obj_acc should start at the correct y value already
 findMinimumAnimation :: Object s a -> Object s Tree -> [(Object s Tree, Integer)] -> Integer -> Scene s ()
 findMinimumAnimation _ _ [] _ = do wait 0.0
@@ -413,8 +357,6 @@ findMinimumAnimation obj_curMin obj_op  (x:xs) curMin = do
                                                 
                                                 waitOn $ oMoveToNewY (fst x) (curMinYPos) 0.4
                                                 waitOn $ oMoveToNewX (fst x) (lessThanQuestion_MaxX + curElementWidth/2 + 0.35) 0.5
-                                                
-                                                
                                                 
                                                 waitOn $ oScaleTo obj_moreThanQuestion 1 0.3
                                                 wait 0.5

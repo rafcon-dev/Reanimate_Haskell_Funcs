@@ -24,13 +24,13 @@ library
                       lens,
                       linear,
                       JuicyPixels
-  exposed-modules:    Rafael_length
-                      Rafael_reverse
-                      Rafael_reverse_hangs
-                      Rafael_sum
-                      Rafael_product
-                      Rafael_maximum
-                      Rafael_minimum
+  exposed-modules:    R_length
+                      R_reverse
+                      R_reverse_hangs
+                      R_sum
+                      R_product
+                      R_maximum
+                      R_minimum
                       Common.Others
                       Common.Assets
                       Common.Utils

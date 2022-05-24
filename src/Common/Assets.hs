@@ -14,6 +14,10 @@ module Common.Assets
     ,numberRoll
     ,fullArrow
     ,dynamicArrow
+    ,get1ParFunctionSignature
+    ,get1ParExpandedFunction
+    ,getFunctionAtEnd
+    ,counter
     ) where
 
 import Codec.Picture --(PixelRGBA8)
@@ -28,6 +32,8 @@ import Reanimate.ColorComponents
 
 import qualified Data.Text as L
 import qualified Data.List as DL
+
+import Common.Utils
 
 --Latex Text Config
 calligraCfg :: TexConfig
@@ -51,6 +57,56 @@ fadeOverlay = mkBackground "black"
 
 --background plane
 bg = mkBackgroundPixel bgPixelColor
+
+--Standard SVG generators------------------------------------------------------------
+get1ParFunctionSignature :: String -> String -> String -> Tree
+get1ParFunctionSignature funcNameStr par1NameStr par2NameStr = 
+    withColFromToPixel funcColorPixel 0 funcEnd $
+    withColFromToPixel funcColorPixel colonsStart colonsEnd $
+    withColFromToPixel tokensColorPixel par1Start par1End $
+    withColFromToPixel funcColorPixel arrow arrow $
+    withColFromToPixel tokensColorPixel par2Start par2End $
+    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack $ txt
+    where
+        funcEnd = length funcNameStr - 1
+        colonsStart = funcEnd + 1
+        colonsEnd = colonsStart + 1
+        par1Start = colonsEnd + 1
+        par1End = par1Start -1 + length par1NameStr
+        arrow = par1End + 1
+        par2Start = arrow + 1
+        par2End = par2Start -1 + length par2NameStr
+        txt = funcNameStr ++ " :: " ++ par1NameStr ++ " $\\rightarrow$ " ++ par2NameStr
+        
+get1ParExpandedFunction :: String -> String -> String -> Tree
+get1ParExpandedFunction funcNameStr inputLabelStr inputStr = 
+    withColFromToPixel funcColorPixel 0 funcEnd $ 
+    withColFromToPixel textColorPixel input1Start input1End $ 
+    withColFromToPixel tokensColorPixel equalPos equalPos $ 
+    withColFromToPixel funcColorPixel input2Start input2End $ 
+    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
+    where
+        funcEnd = length funcNameStr - 1
+        input1Start = funcEnd + 1
+        input1End = input1Start - 1 + length inputLabelStr
+        equalPos = funcEnd + length inputLabelStr + 1
+        input2Start = equalPos + 1
+        input2End = input2Start - 1 + length funcNameStr
+        txt = L.pack $ funcNameStr ++ " " ++ inputLabelStr ++ " =" ++ " " ++ funcNameStr ++ " " ++ inputStr
+        
+getFunctionAtEnd :: String -> String -> String -> Tree
+getFunctionAtEnd funcNameStr inputLabelStr resultStr = 
+    withColFromToPixel funcColorPixel 0 funcEnd $ 
+    withColFromToPixel textColorPixel input1Start input1End $ 
+    withColFromToPixel tokensColorPixel equalPos equalPos $ 
+    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
+    where
+        funcEnd = length funcNameStr - 1
+        input1Start = funcEnd + 1
+        input1End = input1Start - 1 + length inputLabelStr
+        equalPos = funcEnd + length inputLabelStr + 1
+        txt = L.pack $ funcNameStr ++ " " ++ inputLabelStr ++ " =" ++ " " ++ resultStr
+----------------------------------------------------------------------------------------------------
 
 --to create a animated sprite that simulates a number roll effect (like a slot machine)
 --basically it's all the numbers spaced vertically, with a mask so only one number is shown
@@ -98,3 +154,6 @@ dynamicArrow col t = mkGroup [
     maskYOffset
         | t <= 0 = 0
         | otherwise = t * total_arrowLength * 1.07
+        
+counter :: Integer -> SVG
+counter i = withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack (show i)

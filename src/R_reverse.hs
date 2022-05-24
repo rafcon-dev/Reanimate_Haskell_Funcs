@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 
-module Rafael_reverse (animation) where
+module R_reverse (animation) where
 import Codec.Picture --(PixelRGBA8)
 import Control.Lens
 import Control.Monad (forM, forM_, when)
@@ -70,88 +70,39 @@ inputFull =
 funcEnd = length funcNameStr - 1
 
 -- Function signature
-sig = 
-    withColFromToPixel funcColorPixel 0 funcEnd $
-    withColFromToPixel funcColorPixel colonsStart colonsEnd $
-    withColFromToPixel tokensColorPixel par1Start par1End $
-    withColFromToPixel funcColorPixel arrow arrow $
-    withColFromToPixel tokensColorPixel par2Start par2End $
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack $ txt
-    where
-        colonsStart = funcEnd + 1
-        colonsEnd = colonsStart + 1
-        par1Start = colonsEnd + 1
-        par1End = par1Start -1 + length par1NameStr
-        arrow = par1End + 1
-        par2Start = arrow + 1
-        par2End = par2Start -1 + length par2NameStr
-        txt = funcNameStr ++ " :: " ++ par1NameStr ++ " $\\rightarrow$ " ++ par2NameStr
-        
+sig = get1ParFunctionSignature funcNameStr par1NameStr par2NameStr
 
-    
 --Full Function 
 
 txtStartToEqual = funcNameStr ++ " " ++ inputLabelStr ++ " ="
 txtEqualToEnd = " " ++ funcNameStr ++ " " ++ inputStr
 txtEqualToEndOutput = " " ++ outputStr
 
-funcFull = 
-    withColFromToPixel funcColorPixel 0 funcEnd $ 
-    withColFromToPixel textColorPixel input1Start input1End $ 
-    withColFromToPixel tokensColorPixel equalPos equalPos $ 
-    withColFromToPixel funcColorPixel input2Start input2End $ 
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
-    where
-        input1Start = funcEnd + 1
-        input1End = input1Start - 1 + length inputLabelStr
-        equalPos = funcEnd + length inputLabelStr + 1
-        input2Start = equalPos + 1
-        input2End = input2Start - 1 + length funcNameStr
-        txt = L.pack $ txtStartToEqual ++ txtEqualToEnd
+funcFull = get1ParExpandedFunction funcNameStr inputLabelStr inputStr
 
-funcFullAtEnd = 
-    withColFromToPixel funcColorPixel 0 funcEnd $ 
-    withColFromToPixel textColorPixel input1Start input1End $ 
-    withColFromToPixel tokensColorPixel equalPos equalPos $ 
-    withColFromToPixel funcColorPixel outputStart outputEnd $ 
-    withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg txt
-    where
-        input1Start = funcEnd + 1
-        input1End = input1Start - 1 + length inputLabelStr
-        equalPos = funcEnd + length inputLabelStr + 1
-        outputStart = equalPos + 1
-        outputEnd = outputStart - 1 + length outputStr
-        txt = L.pack $ txtStartToEqual ++ txtEqualToEndOutput
+funcFullAtEnd = getFunctionAtEnd funcNameStr inputLabelStr outputStr
     
-equalGlyphPos2 = -1 + length $ filter (/= ' ') txtStartToEqual
+equalGlyphPos = -1 + length $ filter (/= ' ') txtStartToEqual
 
-funcLeftOfEqual = snd $ splitGlyphs [0,1..equalGlyphPos2] funcFull
+funcLeftOfEqual = snd $ splitGlyphs [0,1..equalGlyphPos] funcFull
 funcRightOfEqual = snd $ splitGlyphs [s,s+1..s+e] funcFull
     where
-        s = equalGlyphPos2 + 1
+        s = equalGlyphPos + 1
         e = s + ( length $ filter (/= ' ') txtEqualToEnd)
---funcRightOfEqual = fst $ splitGlyphs [0,1..equalGlyphPos2]  funcFull
+        
 funcNameRight = snd $ splitGlyphs [s,s+1..s + length funcNameStr - 1] funcFull
     where
-        s = equalGlyphPos2 + 1
+        s = equalGlyphPos + 1
         
 brackets = snd $ splitGlyphs [s,s+2..s + length inputStr] funcFull
     where
-        s = equalGlyphPos2 + length funcNameStr + 1
+        s = equalGlyphPos + length funcNameStr + 1
         
 letters = reverse $ map (\i -> snd $ splitGlyphs [i] lettersTogether) [0,1..inputLength-1]
     where
         lettersTogether = snd $ splitGlyphs [s,s+2..s + length inputStr-1] funcFull
-        s = equalGlyphPos2 + length funcNameStr + 2
-        
+        s = equalGlyphPos + length funcNameStr + 2
 --
-
-
-
-
-
-counter :: Integer -> SVG
-counter i = withFillColorPixel textColorPixel $ center $ latexCfg calligraCfg $ L.pack (show i)
         
 ----------------------------------------------------------------------------------------------------------------------
 

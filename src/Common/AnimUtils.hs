@@ -24,6 +24,9 @@ module Common.AnimUtils
     ,oMoveFlipObjects_OnAnArch
     ,getXCenters
     ,oScaleTo
+    ,oShowWithFadeInSliding
+    ,fadeOutObjs
+    ,alignLeftSVGTo
     ) where
 
 import Codec.Picture --(PixelRGBA8)
@@ -35,8 +38,6 @@ import Reanimate.LaTeX
 import Reanimate.Scene
 import Reanimate.Svg
 import Reanimate.ColorComponents
-
-
 
 import Common.Others
 import Common.Utils
@@ -104,6 +105,11 @@ oMoveByVector obj (x, y) dur = do
     originalY <- oRead obj oTranslateY
     oMoveTo  obj (originalX + x, originalY + y) dur
     
+oMoveByX:: Object s a -> Double -> Double -> Scene s ()
+oMoveByX obj x dur = do
+    originalX <- oRead obj oTranslateX
+    oMoveToNewX  obj (originalX + x) dur
+    
 ---animates the moving of an object to a certain x coordinate, while keeping y intact
 oMoveToNewX :: Object s a -> Double -> Double -> Scene s () --moves object to x position
 oMoveToNewX obj x dur = do
@@ -128,13 +134,7 @@ oScaleToX obj xScale dur= do
 oScaleToY :: Object s a -> Double -> Double -> Scene s ()
 oScaleToY obj scaleFactor dur= do
                 fork $ oTweenS obj dur $ \t -> do
-                    oScale %= \prev -> fromToS prev scaleFactor t
-                    
---oMove_SVG_ToX :: Object s a -> Double -> Double -> Scene s ()
---oMove_SVG_ToX obj y dur = do
-                
-                            
-                            
+                    oScale %= \prev -> fromToS prev scaleFactor t                            
                             
 --transform one object into another with a vertical scaling effect (one shrinks in the y while the other grows)
 oTransformWithScalingY :: Object s a -> Object s a -> Scene s ()
@@ -144,20 +144,26 @@ oTransformWithScalingY obj1 obj2 = do
                                         [(fork $ oTweenContext obj1 1 $ \t -> scaleXY (1) (1-t))                                      
                                         ,(fork $ oTweenContext obj2 1 $ \t -> scaleXY (1) (t))]
                                     
-                                    
+--moves object so the left of its bounding box coincides with the left of the target's bounding box
 oAlignLeftTo :: Object s a -> Object s a -> Double -> Scene s()
 oAlignLeftTo obj target dur = do
                                 objLeft <- oRead obj oLeftX 
                                 targetLeft <- oRead target oLeftX 
-                                oMoveByVector obj (targetLeft - objLeft, 0) dur
-                                
+                                oMoveByX obj (targetLeft - objLeft) dur
+
+--moves object so the right of its bounding box coincides with the right of the target's bounding box
 oAlignRightTo :: Object s a -> [Object s a] -> Object s a -> Double -> Scene s()
 oAlignRightTo objParent objsChilds target dur = do
                                 objRight <- oRead objParent oRightX
                                 targetRight <- oRead target oRightX
-                                forkAll $ map (\obj -> oMoveByVector obj (targetRight - objRight, 0) dur) $ [objParent] ++ objsChilds
+                                forkAll $ map (\obj -> oMoveByX obj (targetRight - objRight) dur) $ [objParent] ++ objsChilds
                                 
-
+alignLeftSVGTo :: Tree -> Tree -> Tree
+alignLeftSVGTo svg target = translate (minXTarget-minXOriginal) 0 svg
+    where
+        (minXTarget, _, _, _) = boundingBox target
+        (minXOriginal, _, _, _) = boundingBox svg
+        
 --rotate around center, while keeping object orientation (translate in an arch)        
             
 oMoveByX_OnAnArch :: Object s a ->  Double -> Double -> Double -> Scene s ()
@@ -179,11 +185,30 @@ oMoveFlipObjects_OnAnArch :: [(Object s Tree, Object s Tree)] -> Double -> Doubl
 oMoveFlipObjects_OnAnArch  [] _ _ _ = do wait 0.0
 oMoveFlipObjects_OnAnArch  (x:xs) archHeight forkLag dur = do
                                                     targetX <- oRead (snd $ x) oCenterX
-                                                    --waitOn $ oMoveToNewX (fst x) targetX 0.8
                                                     forkAllWithLag forkLag $ [oMoveToNewX_OnAnArch (fst $ x) targetX archHeight dur, oMoveFlipObjects_OnAnArch xs archHeight forkLag dur]
                                                     return ()
                                                     
 getXCenters :: [Object s a] -> Scene s [Double]
 getXCenters = traverse (\obj -> oRead obj oCenterX)
-    
+
+--shows object with a smooth sliding down and fading effect
+oShowWithFadeInSliding :: Object s a -> Double -> Scene s()
+oShowWithFadeInSliding obj dur = do
+                                    waitOn $ oMoveByVector obj (0, 0.3) 0.1
+                                    forkAllWithLag 0.2
+                                        [
+                                        oMoveByVector obj (0, -0.3) dur
+                                        ,oShowWith obj $ adjustDuration (*dur). oFadeIn
+                                        ]
+--fades out an array of objects
+fadeOutObjs :: [Object s a] -> Double -> Scene s () 
+fadeOutObjs objs dur = do
+                    forkAll $ map (\obj -> oHideWith obj $ adjustDuration (*dur). oFadeOut) objs
 ---------------------------------------------------------------------------------------------------------------------
+
+--REMINDER:oTranslateX is the x position of the origin of the object.
+-----------oCenterX is the x position of the center of the bounding box of the svg drawing
+-----------an object can have oTranslate=0, but have it's drawing in any place, and the center of that "place" is oCenter
+-----------functions that animate the context (and use functions like translate, scale, etc), are effectively
+-----------changing the SVG drawing, while functions that animate the oTranslate values for example, are changing
+-----------the object that contains said SVG. A bit like Blender's Object and Edit mode.
