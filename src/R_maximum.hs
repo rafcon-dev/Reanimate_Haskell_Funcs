@@ -31,7 +31,7 @@ import Common.Assets
 --SVG OBJECTS DEFINITION-------------------------------------------------------------------------------------------------
 
 funcNameStr :: String
-funcNameStr = "max2"
+funcNameStr = "max"
 
 inputLabelStr :: String
 inputLabelStr = "input"

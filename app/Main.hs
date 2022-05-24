@@ -20,13 +20,13 @@ main = sequence_ $ renderAsGifStd animsPaths
     where
         animsPaths =
             [
-            (R_sum.animation, "sum.gif")
-            ,(R_length.animation, "length.gif")
-            ,(R_product.animation, "product.gif")
-            ,(R_minimum.animation, "minimum.gif")
-            ,(R_maximum.animation, "maximum.gif")
-            ,(R_reverse.animation, "reverse.gif")
-            ,(R_reverse_hangs.animation, "reverse_hangs.gif")
+--            (R_sum.animation, "sum.gif")
+--            ,(R_length.animation, "length.gif")
+--            ,(R_product.animation, "product.gif")
+--            ,(R_minimum.animation, "minimum.gif")
+             (R_maximum.animation, "maximum.gif")
+--            ,(R_reverse.animation, "reverse.gif")
+--            ,(R_reverse_hangs.animation, "reverse_hangs.gif")
             ]
 
 renderAsGifStd :: [(Animation, FilePath)] -> [IO ()]
