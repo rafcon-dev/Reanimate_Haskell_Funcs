@@ -2,7 +2,7 @@
 
 
 This project aims to illustrate how a few standard Haskell functions work.
-Animated with the help of [Reanimate](https://reanimate.github.io/).
+The animations below were created programatically with the help of the [Reanimate](https://reanimate.github.io/) library.
 
 
 ![length](length.gif)
